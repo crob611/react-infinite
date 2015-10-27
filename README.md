@@ -100,6 +100,14 @@ Defaults to `150` (in milliseconds). On Apple and some other devices, scroll is 
 #### String `className`
 Allows a CSS class to be set on the scrollable container.
 
+#### Object `containerStyles`
+Styles that will be applied to the scrolling container. Defaults to:
+```js
+overflowX: 'hidden',
+overflowY: 'scroll',
+WebkitOverflowScrolling: 'touch'
+```
+
 ## Sample Code
 
 Code samples are now available in the `/examples` directory for your perusal. Two examples are provided, one for constant height with infinite loading and another with random variable heights with infinite loading. To generate the files necessary for the examples, execute `npm install && gulp build -E`. You may need to first install `gulp` with `npm install -g gulp`.

@@ -56,7 +56,7 @@ describe('Rendering the React Infinite Component Wrapper', function() {
     }).not.toThrow();
   });
 
-  it('renders itself into the DOM with the correct container styles', function() {
+  it('renders itself into the DOM with the default container styles', function() {
     var infinite = TestUtils.renderIntoDocument(
         <Infinite elementHeight={200}
                   containerHeight={800}
@@ -71,6 +71,28 @@ describe('Rendering the React Infinite Component Wrapper', function() {
     expect(rootScrollable.style.overflowX).toEqual('hidden');
     expect(rootScrollable.style.overflowY).toEqual('scroll');
     expect(rootScrollable.style.WebkitOverflowScrolling).toEqual('touch');
+  });
+
+  it('renders itself into the DOM with the provided container styles', function() {
+    var containerStyles = {
+      overflowX: 'scroll',
+      overflowY: 'hidden'
+    };
+
+    var infinite = TestUtils.renderIntoDocument(
+        <Infinite elementHeight={200}
+                  containerHeight={800}
+                  className={"root-scrollable-node"}
+                  containerStyles={containerStyles}>
+          <div/>
+          <div/>
+        </Infinite>
+      );
+
+    var rootScrollable = TestUtils.findRenderedDOMComponentWithClass(infinite, 'root-scrollable-node')
+    expect(rootScrollable.style.overflowX).toEqual(containerStyles.overflowX);
+    expect(rootScrollable.style.overflowY).toEqual(containerStyles.overflowY);
+    expect(rootScrollable.style.WebkitOverflowScrolling).toBe(undefined);
   });
 
   it('applies the provided class name to the root node', function() {
